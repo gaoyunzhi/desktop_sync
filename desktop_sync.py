@@ -8,21 +8,22 @@ import plain_db
 from telegram.ext import Updater
 import os
 
+main_dir = '/Users/user/Desktop'
+
 with open('token') as f:
 	token = f.read().strip()
-tele = Updater(token, use_context=True)  # @weibo_subscription_bot
+tele = Updater(token, use_context=True)  # @daily_read_bot
 debug_group = tele.bot.get_chat(420074357)
 
 existing = plain_db.loadKeyOnlyDB('existing')
 
 @log_on_fail(debug_group)
 def loopImp():
-	for file in os.listdir('~/Desktop'):
-		print(file)
+	for file in os.listdir(main_dir):
 		if existing.contain(file):
 			continue
 		if file.endswith('.jpg'):
-			debug_group.send_photo(file)
+			debug_group.send_photo(main_dir + file)
 		
 def loop():
 	loopImp()
@@ -30,5 +31,3 @@ def loop():
 
 if __name__ == '__main__':
 	threading.Timer(1, loop).start() 
-	tele.start_polling()
-	tele.idle()
