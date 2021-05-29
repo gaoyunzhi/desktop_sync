@@ -17,8 +17,12 @@ existing = plain_db.loadKeyOnlyDB('existing')
 
 @log_on_fail(debug_group)
 def loopImp():
-	
-	
+	for file in os.listdir('~/Desktop'):
+		print(file)
+		if existing.contain(file):
+			continue
+		if file.endswith('.jpg'):
+			debug_group.send_photo(file)
 		
 def loop():
 	loopImp()
