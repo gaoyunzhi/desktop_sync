@@ -23,7 +23,7 @@ def loopImp():
 		if existing.contain(file):
 			continue
 		if file.endswith('.jpg'):
-			debug_group.send_photo(open(main_dir + file, 'rb'))
+			debug_group.send_photo(open(main_dir + '/' + file, 'rb'))
 			existing.add(file)
 		
 def loop():
